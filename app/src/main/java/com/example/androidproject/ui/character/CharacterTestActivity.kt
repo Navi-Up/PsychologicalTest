@@ -87,9 +87,10 @@ class CharacterTestActivity : AppCompatActivity() {
         if (TestManager.nextQuestion(scores)) {
             showQuestion()
         } else {
-            val topCharacter = TestManager.getTopCharacter()
+            // 모든 점수 정규화 후 HashMap으로 Intent 전달
+            val normalizedScores = TestManager.getNormalizedScores()
             val intent = Intent(this, CharacterResultActivity::class.java)
-            intent.putExtra("character", topCharacter)
+            intent.putExtra("scores", HashMap(normalizedScores))
             startActivity(intent)
             finish()
         }
